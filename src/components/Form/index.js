@@ -26,7 +26,7 @@ export default function Form() {
 
             if (calculatedImc) {
                 setImc(calculatedImc);
-                setMessageImc('Seu IMC é igual: ');
+                setMessageImc('Seu IMC é igual a: ');
                 setTextButton('Calcular novamente');
             } else {
                 setImc(null);
@@ -61,10 +61,10 @@ export default function Form() {
                 />
             <TouchableOpacity 
                 style = {styles.buttonCalculator}
-                onpress = {() => {
+                onPress = {() => {
                     validationImc()
                     }} >
-                <text style = {styles.textButtonCalculator}>{textButton}</text>
+                <Text style = {styles.textButtonCalculator}>{textButton}</Text>
             </TouchableOpacity>
             </View>
             <ResultImc messageResultImc={messageImc} resultImc={imc} />
