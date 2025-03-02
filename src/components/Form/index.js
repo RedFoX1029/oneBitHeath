@@ -37,6 +37,15 @@ export default function Form(props) {
     }
 
     function validationImc() {
+        if (imc) {
+            setImc(null);
+            setHeight(null);
+            setWeight(null);
+            setMessageImc('Preencha o peso e a altura');
+            setTextButton('Calcular');
+            return;
+        }
+
         if (weight && height) {
             const calculatedImc = imcCalculator();
 
@@ -50,44 +59,50 @@ export default function Form(props) {
                 setMessageImc('Valores inválidos');
                 setTextButton('Calcular');
             }
-            return;
+        } else {
+            verificationImc()
+            setImc(null);
+            setTextButton('Calcular');
+            setMessageImc('Preencha o peso e a altura');
         }
-        verificationImc()
-        setImc(null);
-        setTextButton('Calcular');
-        setMessageImc('Preencha o peso e a altura');
     }
 
     return (
-        <Pressable onPress = {Keyboard.dismiss} style = {styles.formContext}>
-            <View style = {styles.form}>
-                <Text style = {styles.formLabel}>Altura</Text>
-                <Text style = {styles.errorMessage}>{errorMessage}</Text>
-                <TextInput style = {styles.input}
+        <Pressable onPress={Keyboard.dismiss} style={styles.formContext}>
+        { !imc ? (
+            <View style={styles.form}>
+                <Text style={styles.formLabel}>Altura</Text>
+                {errorMessage && <Text style={styles.errorMessage}>{errorMessage}</Text>}
+                <TextInput 
+                    style={styles.input}
                     onChangeText={setHeight}
                     value={height}
-                    placeholder='Ex: 1.75'
-                    keyboardType='numeric'
+                    placeholder="Ex: 1.75"
+                    keyboardType="numeric"
                 />
 
-                <Text style = {styles.formLabel}>Peso</Text>
-                <Text style = {styles.errorMessage}>{errorMessage}</Text>
-                <TextInput style = {styles.input}
+                <Text style={styles.formLabel}>Peso</Text>
+                {errorMessage && <Text style={styles.errorMessage}>{errorMessage}</Text>}
+                <TextInput 
+                    style={styles.input}
                     onChangeText={setWeight}
                     value={weight}
-                    placeholder='Ex: 75.365'
-                    keyboardType='numeric'
+                    placeholder="Ex: 75.365"
+                    keyboardType="numeric"
                 />
-            <TouchableOpacity 
-                style = {styles.buttonCalculator}
-                onPress = {() => {
-                    validationImc()
-                    }} >
-                <Text style = {styles.textButtonCalculator}>{textButton}</Text>
-            </TouchableOpacity>
             </View>
-            <ResultImc messageResultImc={messageImc} resultImc={imc} />
+            ) : (
+                <View style={styles.exibitionResultImc}>
+                    <ResultImc messageResultImc={messageImc} resultImc={imc} />
+                </View>
+            )}
 
+            <TouchableOpacity 
+                style={styles.buttonCalculator}
+                onPress={validationImc} >
+                <Text style={styles.textButtonCalculator}>{textButton}</Text>
+            </TouchableOpacity>
         </Pressable>
+
     );
 }
