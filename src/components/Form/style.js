@@ -4,12 +4,13 @@ const styles = StyleSheet.create({
     formContext: {
         width: '100%',
         height: '100%',
-        justifyContent: 'space-around',
+        justifyContent: 'flex-start', // Alinha os elementos no topo
         backgroundColor: '#ffffff',
         alignItems: 'center',
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
         paddingTop: 30,
+        paddingBottom: 20,
     },
     form: {
         width: '100%',
@@ -51,6 +52,20 @@ const styles = StyleSheet.create({
     exibitionResultImc: {
         width: '100%',
         height: '50%',
+    },
+    listImc: {
+        marginTop: 20,
+    },
+    resultImcItem: {
+        fontSize: 26,
+        color: 'red',
+        height: 50,
+        width: '100%',
+        paddingRight: 20
+    },
+    textResultItemList: {
+        fontSize: 16,
+        color: 'red'
     }
 })
 
